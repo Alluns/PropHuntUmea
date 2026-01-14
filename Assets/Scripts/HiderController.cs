@@ -15,4 +15,15 @@ public class HiderController : PlayerController
     {
         move = value.Get<Vector2>();
     }
+
+    private void OnLook(InputValue value)
+    {
+        const float distance = 4.0f;
+        
+        //camera.transform.SetLocalPositionAndRotation(-distance, );
+        
+        Vector3 direction = new Vector3(-value.Get<Vector2>().y, value.Get<Vector2>().x, 0);
+
+        //camera.transform.Rotate( direction * 15f * Time.deltaTime, Space.World);
+    }
 }
