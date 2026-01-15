@@ -7,18 +7,25 @@ public class SpectatorController : PlayerController
     private Vector2 look;
 
     private Vector3 currentRot = Vector3.zero;
-    
+
+    protected override void Start()
+    {
+        base.Start();
+
+        currentRot = transform.rotation.eulerAngles;
+    }
+
     public override void PlayerUpdate()
     {
         camera.transform.position = transform.position;
         camera.transform.forward = transform.forward;
         
         Vector3 translation = Vector3.zero;
-        translation += transform.forward * move.y;
-        translation += transform.right * move.x;
+        translation += camera.transform.forward * move.y;
+        translation += camera.transform.right * move.x;
         translation.Normalize();
         
-        transform.Translate(translation * (10.0f * Time.deltaTime));
+        transform.Translate(translation * (10.0f * Time.deltaTime), Space.World);
 
         Vector3 rotation = Vector3.zero;
         rotation += Vector3.up * look.x;
